@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\NhacSiController;
 use App\Http\Controllers\NhacsiController2;
@@ -15,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/', function(){
+    return view('welcome');
+});
 // Route::get('/', [NhacSiController::class,'list'])->name('nhacsi.list');
 // Route::get('/{id}', [NhacSiController::class,'detail'])->name('nhacsi.detail');
 // Route::get('/xoa/{id}', [NhacSiController::class,'delete'])->name('nhacsi.delete');
@@ -30,3 +34,17 @@ use Illuminate\Support\Facades\Route;
 
 //Route resource
 Route::resource('books',BookController::class);
+
+// LOGIN
+Route::get('auth/login', [LoginController::class, 'index'])->name('login');
+Route::post('auth/login', [LoginController::class, 'login'])->name('login');
+Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// REGISTER
+Route::get('auth/register', [RegisterController::class, 'index'])->name('register');
+Route::post('auth/register', [RegisterController::class, 'register'])->name('register');
+
+Route::get('admin', function(){
+    return 'day la admin';
+})->middleware(['auth','isAdmin']);

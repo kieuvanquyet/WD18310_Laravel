@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 <table class="table">
+    <a href="{{route('books.create')}}">ADD</a>
     <tr>
         <th>ID</th>
         <th>ten</th>
@@ -20,11 +21,13 @@
         <td>{{$item->name}}</td>
         <td>{{$item->public_company}}</td>
         <td>{{$item->author->name}}</td>
-        <td>{{$item->image}}</td>
+        <td>
+            <img src="{{Storage::url($item->image)}}" width="100px" height="100px">
+        </td>
         <td>{{$item->quantity}}</td>
         <td>
             {!!$item->is_active ? '<span class="badge bg-success">Hoat dong</span>'
-            : '<span class="badge bg-danger">Hoat dong</span>'!!}
+            : '<span class="badge bg-danger">khong hoat dong</span>'!!}
         </td>  
         <td style="display: flex">
            
